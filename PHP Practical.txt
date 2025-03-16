@@ -80,25 +80,67 @@ Q2. Design HTML form to accept two strings and following three options (use radi
 ANS:- <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>String Operations</title>
 </head>
 <body>
-    <h2>String Operations</h2>
-    <form action="process_strings.php" method="post">
-        <label for="string1">String 1:</label>
+    <h1>String Operations</h1>
+    <form action="process.php" method="post">
+        <label for="string1">Enter First String:</label><br>
         <input type="text" id="string1" name="string1" required><br><br>
-        <label for="string2">String 2:</label>
+        <label for="string2">Enter Second String:</label><br>
         <input type="text" id="string2" name="string2" required><br><br>
+        <label>Select Operation:</label><br>
         <input type="radio" id="compare" name="operation" value="compare" required>
-        <label for="compare">Compare Strings</label><br>
+        <label for="compare">Compare 2 strings</label><br>
         <input type="radio" id="uppercase" name="operation" value="uppercase">
-        <label for="uppercase">Convert to Uppercase</label><br>
+        <label for="uppercase">Convert string into Uppercase</label><br>
         <input type="radio" id="lowercase" name="operation" value="lowercase">
-        <label for="lowercase">Convert to Lowercase</label><br><br>
-        <button type="submit">Perform Operation</button>
+        <label for="lowercase">Convert string into Lowercase</label><br><br>
+        <input type="submit" value="Submit">
     </form>
 </body>
 </html>
+
+
+<?php  //process.php//
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Get the input strings and selected operation
+    $string1 = $_POST['string1'];
+    $string2 = $_POST['string2'];
+    $operation = $_POST['operation'];
+    // Initialize a variable to hold the result
+    $result = "";
+    // Perform the selected operation
+    switch ($operation) {
+        case 'compare':
+            if ($string1 === $string2) {
+                $result = "The strings are equal.";
+            } else {
+                $result = "The strings are not equal.";
+            }
+            break;
+        case 'uppercase':
+            $result = "Uppercase of String 1: " . strtoupper($string1) . "<br>";
+            $result .= "Uppercase of String 2: " . strtoupper($string2);
+            break;
+        case 'lowercase':
+            $result = "Lowercase of String 1: " . strtolower($string1) . "<br>";
+            $result .= "Lowercase of String 2: " . strtolower($string2);
+            break;
+        default:
+            $result = "Invalid operation selected.";
+            break;
+    }
+    // Display the result
+    echo "<h1>Result</h1>";
+    echo "<p>$result</p>";
+    echo '<a href="index.html">Go Back</a>';
+} else {
+    echo "Invalid request method.";
+}
+?>
 
 Q1) Write a HTML code, to create the following table
 Bno Bname Price Rs. Paise.
@@ -333,7 +375,7 @@ foreach ($numbers as $value) {
 }
 ?>
 
-Q2) Create table Login (username, password) in Mysql . Write HTML code to design a login form to accept username and password from user. If input username and password matches with the username and password in login table display message “Login Successful” otherwise display “Login Unsuccessful”.
+Q2) Create table Login (username, password) in Mysql . Write HTML code to design a login form to accept username and password from user. If input username and password matches with the username and password in login table display message Â“Login SuccessfulÂ” otherwise display Â“Login UnsuccessfulÂ”.
 Step 1: Create login Table in MySQL 
 Run this SQL query in MySQL to create the login table:
 CREATE DATABASE user_db;
@@ -575,7 +617,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo implode(" ", $numInWords);
 }
 ?>
-Q2) Create class Fruit with data member’s name, color. Derive class Apple from Fruit with data members price and member functions to initialize object and to print the Fruit details.
+Q2) Create class Fruit with data memberÂ’s name, color. Derive class Apple from Fruit with data members price and member functions to initialize object and to print the Fruit details.
 ANS:-
 <?php
 // Parent class: Fruit
@@ -1001,7 +1043,7 @@ print_r($mergedArray);
 echo "</pre>";
 ?>
 
-Q2) Create a login form with a username and password. Once the user logs in, the second form should be displayed to accept user details (name, city, phone no). If the user doesn’t enter information within a specified time limit, expire his session and give a warning.
+Q2) Create a login form with a username and password. Once the user logs in, the second form should be displayed to accept user details (name, city, phone no). If the user doesnÂ’t enter information within a specified time limit, expire his session and give a warning.
 ANS:-
 Step 1: Create Login Form (login.php)
 <?php
